@@ -1,0 +1,237 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-a-clean-dashboard-ui-with-separate-pages-for-1-crop-yield-prediction-2-plant-disease-detection-leaf-image-upload-3-smart-irrigation-recommendation-plus-a-4-data-visualization-page-that-summarizes-results-across-modules",
+      "featureTitle": "Implement a clean dashboard UI with separate pages for: (1) Crop Yield Prediction, (2) Plant Disease Detection (leaf image upload), (3) Smart Irrigation Recommendation, plus a (4) Data Visualization page that summarizes results across modules.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AppNav.tsx",
+        "frontend/src/layouts/AppLayout.tsx",
+        "frontend/src/pages/CropYieldPage.tsx",
+        "frontend/src/pages/DashboardPage.tsx",
+        "frontend/src/pages/DiseaseDetectionPage.tsx",
+        "frontend/src/pages/IrrigationPage.tsx",
+        "frontend/src/pages/VisualizationsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-coherent-distinctive-visual-theme-and-apply-it-consistently-colors-typography-spacing-card-styles-form-controls-across-all-pages-without-using-a-blue-purple-primary-palette",
+      "featureTitle": "Add a coherent, distinctive visual theme and apply it consistently (colors, typography, spacing, card styles, form controls) across all pages without using a blue/purple primary palette.",
+      "files": [
+        "frontend/src/components/FormField.tsx",
+        "frontend/src/components/ThemeCard.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-crop-yield-prediction-module-implement-an-end-to-end-flow-that-accepts-inputs-soil-type-rainfall-mm-temperature-c-humidity-fertilizer-usage-returns-predicted-yield-tons-hectare-and-an-accuracy-score-and-renders-at-least-one-graph-visualization-on-the-frontend",
+      "featureTitle": "Crop Yield Prediction module: implement an end-to-end flow that accepts inputs (Soil Type, Rainfall mm, Temperature °C, Humidity %, Fertilizer Usage), returns Predicted Yield (tons/hectare) and an Accuracy Score, and renders at least one graph visualization on the frontend.",
+      "files": [
+        "frontend/src/hooks/useCropYieldPrediction.ts",
+        "frontend/src/pages/CropYieldPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-plant-disease-detection-module-provide-a-leaf-image-upload-ui-send-the-image-to-the-backend-and-return-disease-name-confidence-percentage-and-suggested-treatment",
+      "featureTitle": "Plant Disease Detection module: provide a leaf image upload UI, send the image to the backend, and return Disease Name, Confidence Percentage, and Suggested Treatment.",
+      "files": [
+        "frontend/src/components/ImageUploadField.tsx",
+        "frontend/src/hooks/useDiseaseDetection.ts",
+        "frontend/src/pages/DiseaseDetectionPage.tsx",
+        "frontend/src/utils/fileToUint8Array.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-smart-irrigation-recommendation-module-implement-an-end-to-end-flow-that-accepts-inputs-soil-moisture-level-weather-condition-temperature-and-returns-water-required-liters-acre-and-irrigation-recommendation-yes-no",
+      "featureTitle": "Smart Irrigation Recommendation module: implement an end-to-end flow that accepts inputs (Soil Moisture Level, Weather Condition, Temperature) and returns Water Required (liters/acre) and Irrigation Recommendation (Yes/No).",
+      "files": [
+        "frontend/src/hooks/useIrrigationRecommendation.ts",
+        "frontend/src/pages/IrrigationPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-visualizations-page-that-compares-module-outputs-and-model-accuracy-comparison-charts-using-a-frontend-charting-library",
+      "featureTitle": "Add a visualizations page that compares module outputs and “model accuracy comparison” charts using a frontend charting library.",
+      "files": [
+        "frontend/src/hooks/useHistoryQueries.ts",
+        "frontend/src/pages/VisualizationsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-implement-authentication-using-internet-identity-and-gate-history-persistence-features-behind-the-authenticated-principal-no-custom-username-password-storage",
+      "featureTitle": "Implement authentication using Internet Identity and gate history/persistence features behind the authenticated principal (no custom username/password storage).",
+      "files": [
+        "frontend/src/components/AuthGate.tsx",
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useUserProfile.ts",
+        "frontend/src/layouts/AppLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-8"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-robust-error-handling-end-to-end-client-side-validation-backend-input-validation-and-consistent-error-messaging-in-the-ui",
+      "featureTitle": "Add robust error handling end-to-end: client-side validation, backend input validation, and consistent error messaging in the UI.",
+      "files": [
+        "frontend/src/components/AppAlert.tsx",
+        "frontend/src/pages/CropYieldPage.tsx",
+        "frontend/src/pages/DiseaseDetectionPage.tsx",
+        "frontend/src/pages/IrrigationPage.tsx",
+        "frontend/src/utils/formatErrorMessage.ts",
+        "frontend/src/utils/validation.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-provide-production-ready-project-documentation-readme-with-local-run-steps-for-the-internet-computer-template-clear-module-descriptions-and-how-to-test-each-api-from-the-frontend-add-code-comments-where-necessary-to-explain-data-flow-and-assumptions",
+      "featureTitle": "Provide production-ready project documentation: README with local run steps for the Internet Computer template, clear module descriptions, and how to test each API from the frontend; add code comments where necessary to explain data flow and assumptions.",
+      "files": [
+        "frontend/README.md",
+        "frontend/src/hooks/useCropYieldPrediction.ts",
+        "frontend/src/hooks/useDiseaseDetection.ts",
+        "frontend/src/hooks/useIrrigationRecommendation.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-10"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-a-history-section-either-per-module-or-centralized-that-lists-the-authenticated-user-s-saved-runs-with-timestamps-and-the-key-output-fields-and-allows-clearing-history",
+      "featureTitle": "Create a “History” section (either per module or centralized) that lists the authenticated user’s saved runs with timestamps and the key output fields, and allows clearing history.",
+      "files": [
+        "frontend/src/components/HistorySection.tsx",
+        "frontend/src/pages/CropYieldPage.tsx",
+        "frontend/src/pages/DiseaseDetectionPage.tsx",
+        "frontend/src/pages/IrrigationPage.tsx",
+        "frontend/src/pages/VisualizationsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

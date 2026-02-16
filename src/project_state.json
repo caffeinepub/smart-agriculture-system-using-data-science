@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Full-stack data science project “Smart Agriculture System using Data Science” with a React frontend and Python (Flask/FastAPI) backend to: predict crop yield (Random Forest), detect plant diseases from leaf images (CNN), and recommend irrigation needs, including dashboards/visualizations, authentication, training scripts, database, and production-ready structure.",
+  "architectural_notes": [
+    "Tech stack decision: React.js frontend + Python backend (Flask or FastAPI) serving ML inference APIs",
+    "ML stack: scikit-learn for Random Forest regression; TensorFlow/Keras for CNN image classification",
+    "Database option: SQLite for local/dev; MySQL for production-ready deployment",
+    "Visualization: Chart.js on frontend and/or Matplotlib for generated plots"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Minimal farm-themed app logo (smart-agri-logo.dim_512x512.png)\n- Wide dashboard hero illustration with fields, sensors, and crops in a clean flat style (dashboard-hero.dim_1600x600.png)",
+  "existing_features": [
+    {
+      "id": "feature-implement-a-clean-dashboard-ui-with-separate-pages-for-1-crop-yield-prediction-2-plant-disease-detection-leaf-image-upload-3-smart-irrigation-recommendation-plus-a-4-data-visualization-page-that-summarizes-results-across-modules",
+      "title": "Implement a clean dashboard UI with separate pages for: (1) Crop Yield Prediction, (2) Plant Disease Detection (leaf image upload), (3) Smart Irrigation Recommendation, plus a (4) Data Visualization page that summarizes results across modules.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-coherent-distinctive-visual-theme-and-apply-it-consistently-colors-typography-spacing-card-styles-form-controls-across-all-pages-without-using-a-blue-purple-primary-palette",
+      "title": "Add a coherent, distinctive visual theme and apply it consistently (colors, typography, spacing, card styles, form controls) across all pages without using a blue/purple primary palette.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-crop-yield-prediction-module-implement-an-end-to-end-flow-that-accepts-inputs-soil-type-rainfall-mm-temperature-c-humidity-fertilizer-usage-returns-predicted-yield-tons-hectare-and-an-accuracy-score-and-renders-at-least-one-graph-visualization-on-the-frontend",
+      "title": "Crop Yield Prediction module: implement an end-to-end flow that accepts inputs (Soil Type, Rainfall mm, Temperature °C, Humidity %, Fertilizer Usage), returns Predicted Yield (tons/hectare) and an Accuracy Score, and renders at least one graph visualization on the frontend.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-plant-disease-detection-module-provide-a-leaf-image-upload-ui-send-the-image-to-the-backend-and-return-disease-name-confidence-percentage-and-suggested-treatment",
+      "title": "Plant Disease Detection module: provide a leaf image upload UI, send the image to the backend, and return Disease Name, Confidence Percentage, and Suggested Treatment.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-smart-irrigation-recommendation-module-implement-an-end-to-end-flow-that-accepts-inputs-soil-moisture-level-weather-condition-temperature-and-returns-water-required-liters-acre-and-irrigation-recommendation-yes-no",
+      "title": "Smart Irrigation Recommendation module: implement an end-to-end flow that accepts inputs (Soil Moisture Level, Weather Condition, Temperature) and returns Water Required (liters/acre) and Irrigation Recommendation (Yes/No).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-visualizations-page-that-compares-module-outputs-and-model-accuracy-comparison-charts-using-a-frontend-charting-library",
+      "title": "Add a visualizations page that compares module outputs and “model accuracy comparison” charts using a frontend charting library.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-authentication-using-internet-identity-and-gate-history-persistence-features-behind-the-authenticated-principal-no-custom-username-password-storage",
+      "title": "Implement authentication using Internet Identity and gate history/persistence features behind the authenticated principal (no custom username/password storage).",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-robust-error-handling-end-to-end-client-side-validation-backend-input-validation-and-consistent-error-messaging-in-the-ui",
+      "title": "Add robust error handling end-to-end: client-side validation, backend input validation, and consistent error messaging in the UI.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-provide-production-ready-project-documentation-readme-with-local-run-steps-for-the-internet-computer-template-clear-module-descriptions-and-how-to-test-each-api-from-the-frontend-add-code-comments-where-necessary-to-explain-data-flow-and-assumptions",
+      "title": "Provide production-ready project documentation: README with local run steps for the Internet Computer template, clear module descriptions, and how to test each API from the frontend; add code comments where necessary to explain data flow and assumptions.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-history-section-either-per-module-or-centralized-that-lists-the-authenticated-user-s-saved-runs-with-timestamps-and-the-key-output-fields-and-allows-clearing-history",
+      "title": "Create a “History” section (either per module or centralized) that lists the authenticated user’s saved runs with timestamps and the key output fields, and allows clearing history.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "React.js clean dashboard UI with separate pages for Crop Yield Prediction, Plant Disease Detection, and Smart Irrigation modules",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Backend API (Flask or FastAPI) exposing endpoints for all ML models with robust error handling",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Crop Yield Prediction module using Random Forest Regression with sample training dataset; outputs predicted yield, accuracy score, and graphs",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Plant Disease Detection module: leaf image upload + CNN trained on PlantVillage; outputs disease, confidence %, and suggested treatment",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Smart Irrigation Recommendation module: takes soil moisture/weather/temperature; outputs water required and irrigation yes/no recommendation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Data visualization dashboard including model accuracy comparison (charts via Chart.js/Matplotlib)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Model training scripts, preprocessing pipeline, and saved model artifacts for each module",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Database integration (MySQL or SQLite) with schema for users/auth and any needed app data",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Basic authentication (login/signup) integrated into frontend and backend",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Production-ready project structure with README, requirements.txt, code comments, sample dataset, and local run instructions",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Create a Motoko backend (single main actor) that exposes typed APIs for the three modules and stores per-user history of predictions/results in stable storage.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Include sample datasets/artifacts in-repo as static assets suitable for demo/visualization (e.g., a small CSV/JSON for agriculture yield examples and a small label/treatment mapping for diseases).",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Smart Agriculture System using Data Science",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

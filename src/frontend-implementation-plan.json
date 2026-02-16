@@ -1,0 +1,411 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Smart Agriculture Dashboard (React UI with IC Internet Identity, history, and visual analytics)",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Create a clean dashboard UI with separate pages for Crop Yield Prediction, Plant Disease Detection, Smart Irrigation Recommendation, and Data Visualizations, with persistent navigation and standard UI states.",
+      "acceptanceCriteria": [
+        "App has a persistent navigation (sidebar or top nav) linking to Dashboard, Crop Yield, Disease Detection, Irrigation, Visualizations.",
+        "Each module page contains an input form, a submit action, a results panel, and clear empty/loading/error states.",
+        "All user-facing text is in English."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "create",
+          "description": "Create the top-level app component that sets up routing and wraps pages in a persistent layout (navigation + content)."
+        },
+        {
+          "path": "frontend/src/routes.tsx",
+          "operation": "create",
+          "description": "Define application routes for Dashboard, Crop Yield, Disease Detection, Irrigation, and Visualizations pages, and export route constants for use in navigation."
+        },
+        {
+          "path": "frontend/src/layouts/AppLayout.tsx",
+          "operation": "create",
+          "description": "Implement the persistent layout (sidebar/top nav) and shared page container styling used across all pages."
+        },
+        {
+          "path": "frontend/src/components/AppNav.tsx",
+          "operation": "create",
+          "description": "Create the persistent navigation component that links to Dashboard, Crop Yield, Disease Detection, Irrigation, and Visualizations."
+        },
+        {
+          "path": "frontend/src/pages/DashboardPage.tsx",
+          "operation": "create",
+          "description": "Create the dashboard landing page with summary cards and a hero section that references the generated illustration at frontend/public/assets/generated/dashboard-hero.dim_1600x600.png."
+        },
+        {
+          "path": "frontend/src/pages/CropYieldPage.tsx",
+          "operation": "create",
+          "description": "Create the Crop Yield Prediction page with input form, submit, results panel, and empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/pages/DiseaseDetectionPage.tsx",
+          "operation": "create",
+          "description": "Create the Plant Disease Detection page with image upload, submit, results panel, and empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/pages/IrrigationPage.tsx",
+          "operation": "create",
+          "description": "Create the Smart Irrigation Recommendation page with input form, submit, results panel, and empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/pages/VisualizationsPage.tsx",
+          "operation": "create",
+          "description": "Create the Visualizations page shell to render charts that summarize results across modules."
+        },
+        {
+          "path": "frontend/public/assets/generated/smart-agri-logo.dim_512x512.png",
+          "operation": "create",
+          "description": "Add the generated minimal farm-themed logo asset and reference it from the layout/navigation branding."
+        },
+        {
+          "path": "frontend/public/assets/generated/dashboard-hero.dim_1600x600.png",
+          "operation": "create",
+          "description": "Add the generated wide dashboard hero illustration asset and reference it on the Dashboard page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Apply a cohesive, distinctive non-blue/non-purple visual theme across layout, forms, cards, and charts.",
+      "acceptanceCriteria": [
+        "Theme is applied consistently across layout, buttons, inputs, charts, and cards.",
+        "Primary colors are not blue/purple."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "create",
+          "description": "Create global Tailwind + CSS variable theme tokens (shadcn-compatible) using an earthy/green primary palette (not blue/purple) and consistent typography/spacing."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Adjust Tailwind theme extensions as needed to align with the new non-blue/non-purple primary palette via CSS variables (keeping existing structure)."
+        },
+        {
+          "path": "frontend/src/components/ThemeCard.tsx",
+          "operation": "create",
+          "description": "Create a shared card wrapper component for consistent padding/borders/shadows used across module pages."
+        },
+        {
+          "path": "frontend/src/components/FormField.tsx",
+          "operation": "create",
+          "description": "Create a shared form field component (label, input/select, inline validation message) to ensure consistent form styling across pages."
+        },
+        {
+          "path": "frontend/src/components/charts/ChartShell.tsx",
+          "operation": "create",
+          "description": "Create a consistent chart container (title, description, empty state) so charts match the global theme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Implement the Crop Yield Prediction end-to-end UI: validated inputs, backend call, results display, and at least one chart using an in-repo sample dataset for visualization context.",
+      "acceptanceCriteria": [
+        "Frontend form validates numeric ranges (no negative rainfall/humidity, etc.) and shows inline errors.",
+        "Calling the backend returns a numeric predicted yield and a numeric accuracy score.",
+        "Frontend renders a chart (e.g., bar/line) showing the prediction in context (e.g., feature contributions, or comparison to sample baseline values).",
+        "A sample agriculture dataset is included in the repo as a static file and referenced in code (for demo/visualization)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CropYieldPage.tsx",
+          "operation": "modify",
+          "description": "Implement validated form controls for soilType/rainfall/temperature/humidity/fertilizerUsage, call backend predictYield, and render results with empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/hooks/useCropYieldPrediction.ts",
+          "operation": "create",
+          "description": "Add a React Query mutation hook that calls actor.predictYield and normalizes loading/duplicate-submit prevention and typed error handling."
+        },
+        {
+          "path": "frontend/src/components/charts/SimpleBarChart.tsx",
+          "operation": "create",
+          "description": "Implement a small frontend chart component (charting library within the app code) for showing prediction vs baseline values in a themed bar chart."
+        },
+        {
+          "path": "frontend/public/assets/data/sample-crop-yield-dataset.json",
+          "operation": "create",
+          "description": "Add a small static sample dataset asset for crop yield demo/visualization; load it from the frontend without external network calls."
+        },
+        {
+          "path": "frontend/src/data/loadSampleCropYieldDataset.ts",
+          "operation": "create",
+          "description": "Implement a small loader that reads frontend/public/assets/data/sample-crop-yield-dataset.json and provides baseline values for chart context."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Implement Plant Disease Detection UI: leaf image upload with preview, backend submission using blob-storage ExternalBlob, and results display with clear validation/errors.",
+      "acceptanceCriteria": [
+        "Frontend supports uploading common image formats (at least PNG/JPG) and shows a preview before submission.",
+        "Backend accepts the uploaded image payload (or its encoded representation) with size/type validation and returns a structured result containing diseaseName, confidence, and treatment.",
+        "Frontend displays the result in a clear card layout and records the result into the user’s history.",
+        "If input is invalid (missing image/too large/unsupported type), user sees a clear error message."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/DiseaseDetectionPage.tsx",
+          "operation": "modify",
+          "description": "Implement image file selection (PNG/JPG), preview, size/type validation, submit action, and results card rendering."
+        },
+        {
+          "path": "frontend/src/hooks/useDiseaseDetection.ts",
+          "operation": "create",
+          "description": "Create a mutation hook that converts the selected file to bytes and uses the blob-storage ExternalBlob to call actor.detectDisease. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ImageUploadField.tsx",
+          "operation": "create",
+          "description": "Create a reusable image upload component with validation and preview, used by the Disease Detection module."
+        },
+        {
+          "path": "frontend/src/utils/fileToUint8Array.ts",
+          "operation": "create",
+          "description": "Add a helper to convert browser File objects to Uint8Array for ExternalBlob.fromBytes."
+        },
+        {
+          "path": "frontend/public/assets/data/disease-label-treatment-map.json",
+          "operation": "create",
+          "description": "Add a small in-repo disease label → suggested treatment mapping asset for demo/help text; load without external network calls."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Implement Smart Irrigation Recommendation UI: validated inputs, backend call, and results display.",
+      "acceptanceCriteria": [
+        "Frontend validates inputs and shows error states for missing/invalid values.",
+        "Backend returns a numeric waterRequiredLitersPerAcre and a boolean/enum recommendation.",
+        "Result is shown on the page and stored in per-user history."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/IrrigationPage.tsx",
+          "operation": "modify",
+          "description": "Implement validated inputs (soilMoistureLevel/weatherCondition/temperature), call backend getIrrigationRecommendation, and display water required + recommendation with empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/hooks/useIrrigationRecommendation.ts",
+          "operation": "create",
+          "description": "Add a React Query mutation hook for actor.getIrrigationRecommendation with duplicate-submit prevention and consistent error mapping."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build a Visualizations page that charts real stored history: crop yield accuracy, disease confidence distribution, and irrigation Yes/No breakdown.",
+      "acceptanceCriteria": [
+        "Visualizations page shows at least: (1) crop yield accuracy score trend or distribution, (2) disease detection confidence distribution, (3) irrigation recommendation breakdown (Yes/No) over history.",
+        "Charts render from real stored history returned by the backend (not hardcoded)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/VisualizationsPage.tsx",
+          "operation": "modify",
+          "description": "Load authenticated user history for all modules and render the required comparison charts with themed empty/loading/error states."
+        },
+        {
+          "path": "frontend/src/hooks/useHistoryQueries.ts",
+          "operation": "create",
+          "description": "Create React Query hooks for actor.getCropYieldHistory, actor.getPlantDiseaseHistory, and actor.getIrrigationHistory, enabled only when authenticated."
+        },
+        {
+          "path": "frontend/src/components/charts/LineTrendChart.tsx",
+          "operation": "create",
+          "description": "Add a chart component for showing crop yield accuracy trend/distribution using the app's chart components."
+        },
+        {
+          "path": "frontend/src/components/charts/HistogramChart.tsx",
+          "operation": "create",
+          "description": "Add a histogram/distribution chart component for disease confidence percentages."
+        },
+        {
+          "path": "frontend/src/components/charts/PieBreakdownChart.tsx",
+          "operation": "create",
+          "description": "Add a breakdown chart component to show irrigation recommendation Yes/No counts from history."
+        }
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "summary": "Integrate Internet Identity sign-in/out and gate history/persistence features behind authenticated principals.",
+      "acceptanceCriteria": [
+        "Users can sign in/out with Internet Identity.",
+        "When signed out, module pages still render but any “Save to history / View history” features prompt sign-in (or history is hidden).",
+        "Backend associates stored results with caller principal."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "create",
+          "description": "Implement a login/logout button using the existing Internet Identity hook patterns and clear cached queries on logout. Use the authorization component's frontend guidance for login/logout behavior. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AuthGate.tsx",
+          "operation": "create",
+          "description": "Create a small wrapper component to conditionally render gated history sections (show sign-in prompt when signed out). Use the authorization component's gating guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/layouts/AppLayout.tsx",
+          "operation": "modify",
+          "description": "Wire LoginButton into the persistent navigation/layout and display the logged-in user name when available per the authorization component UX guidance. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "create",
+          "description": "Add hooks to load the caller profile and prompt for profile setup on first login per the authorization component requirements. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create a modal to ask for a human-readable name on first login and save it via the backend profile functions per the authorization component instructions. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Add consistent client-side validation and unified UI error handling with duplicate-submission prevention while loading.",
+      "acceptanceCriteria": [
+        "All backend endpoints return typed error responses for invalid payloads and unexpected failures.",
+        "Frontend displays errors in a consistent component (toast/alert) and prevents duplicate submissions while loading."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/AppAlert.tsx",
+          "operation": "create",
+          "description": "Create a shared alert component for displaying validation, authorization, and unexpected errors consistently across pages."
+        },
+        {
+          "path": "frontend/src/utils/formatErrorMessage.ts",
+          "operation": "create",
+          "description": "Centralize mapping of thrown errors into user-friendly English messages (including authorization failures) for use by all pages and hooks."
+        },
+        {
+          "path": "frontend/src/utils/validation.ts",
+          "operation": "create",
+          "description": "Add reusable validation helpers for numeric ranges, required fields, and file type/size checks used across all module forms."
+        },
+        {
+          "path": "frontend/src/pages/CropYieldPage.tsx",
+          "operation": "modify",
+          "description": "Wire shared validation + AppAlert; disable submit while loading to prevent duplicate submissions."
+        },
+        {
+          "path": "frontend/src/pages/DiseaseDetectionPage.tsx",
+          "operation": "modify",
+          "description": "Wire shared validation + AppAlert; disable submit while loading to prevent duplicate submissions; show clear errors for missing/invalid image."
+        },
+        {
+          "path": "frontend/src/pages/IrrigationPage.tsx",
+          "operation": "modify",
+          "description": "Wire shared validation + AppAlert; disable submit while loading to prevent duplicate submissions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "summary": "Add production-ready documentation and brief explanatory comments for frontend data flow and assumptions.",
+      "acceptanceCriteria": [
+        "README includes: prerequisites, install steps, how to run locally, how to deploy locally with dfx, and how to use each module UI.",
+        "Documentation explains platform constraints vs the originally requested Python/ML stack and what is implemented instead.",
+        "Key logic sections (backend prediction/recommendation logic and frontend API calls) include brief explanatory comments."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/README.md",
+          "operation": "create",
+          "description": "Write frontend-focused run instructions and module usage/testing notes, including Internet Identity behavior and how UI maps to backend capabilities."
+        },
+        {
+          "path": "frontend/src/hooks/useCropYieldPrediction.ts",
+          "operation": "modify",
+          "description": "Add brief comments explaining request/response flow, validation assumptions, and how results are handled in the UI."
+        },
+        {
+          "path": "frontend/src/hooks/useDiseaseDetection.ts",
+          "operation": "modify",
+          "description": "Add brief comments explaining file-to-bytes conversion and ExternalBlob usage for image submission. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useIrrigationRecommendation.ts",
+          "operation": "modify",
+          "description": "Add brief comments explaining request/response flow and UI assumptions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Include small in-repo sample datasets/artifacts as static assets and load them locally in the frontend.",
+      "acceptanceCriteria": [
+        "Repo includes at least one small sample dataset file for crop yield visualization and one disease label→treatment mapping file.",
+        "Frontend loads these assets without requiring any external network calls."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/data/sample-crop-yield-dataset.json",
+          "operation": "modify",
+          "description": "Ensure the sample crop yield dataset is present and suitable for local visualization context (small demo-ready payload)."
+        },
+        {
+          "path": "frontend/public/assets/data/disease-label-treatment-map.json",
+          "operation": "modify",
+          "description": "Ensure the disease mapping file is present and loaded locally for UI hints/treatments (small demo-ready payload)."
+        },
+        {
+          "path": "frontend/src/data/loadDiseaseTreatmentMap.ts",
+          "operation": "create",
+          "description": "Implement a loader that reads frontend/public/assets/data/disease-label-treatment-map.json and exposes mappings for display without external calls."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Implement authenticated user History views (per module or centralized) with timestamps, key outputs, and clear-history action that updates UI immediately.",
+      "acceptanceCriteria": [
+        "Authenticated users can view a list of past results for each module including timestamp and output summary.",
+        "Users can clear their history; backend deletes the stored entries for that principal.",
+        "UI updates immediately after clearing (refetch or optimistic update)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/HistorySection.tsx",
+          "operation": "create",
+          "description": "Create a reusable History section component that renders lists with timestamps and output summaries and supports a clear-history action (gated behind authentication)."
+        },
+        {
+          "path": "frontend/src/hooks/useClearHistory.ts",
+          "operation": "create",
+          "description": "Add a React Query mutation hook for actor.clearHistory and invalidate/refetch history queries on success for immediate UI updates."
+        },
+        {
+          "path": "frontend/src/pages/CropYieldPage.tsx",
+          "operation": "modify",
+          "description": "Embed a Crop Yield history panel (authenticated only) that lists past results and supports clearing history."
+        },
+        {
+          "path": "frontend/src/pages/DiseaseDetectionPage.tsx",
+          "operation": "modify",
+          "description": "Embed a Disease Detection history panel (authenticated only) that lists past results and supports clearing history."
+        },
+        {
+          "path": "frontend/src/pages/IrrigationPage.tsx",
+          "operation": "modify",
+          "description": "Embed an Irrigation history panel (authenticated only) that lists past results and supports clearing history."
+        },
+        {
+          "path": "frontend/src/pages/VisualizationsPage.tsx",
+          "operation": "modify",
+          "description": "Ensure charts reflect cleared history immediately by depending on the shared history queries invalidated after clearHistory."
+        }
+      ]
+    }
+  ]
+}

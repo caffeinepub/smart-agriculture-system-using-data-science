@@ -1,0 +1,139 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-16T07:40:26.208Z",
+  "summary": "The diff adds a React router app shell, nav/auth gating components, several React Query hooks, and a Motoko actor with basic prediction/detection/recommendation functions. However, several BuildRequest acceptance criteria are not evidenced in the shown diff (notably stable storage + typed error variants in Motoko, backend validation for disease uploads, charts/visualizations requirements, and documentation/static demo datasets). The diff also introduces some unrequested admin/access-control and profile-setup functionality.",
+  "missing_requirements": [
+    {
+      "id": "REQ-3",
+      "requirement": "Persist per-user history across canister upgrades using stable storage (stable variables) and no external DB.",
+      "reason": "In the shown backend code, histories are stored in `let cropYieldHistory = Map.empty<Principal, List.List<CropYieldResult>>();` (and similar), with no `stable var` or upgrade hooks evidenced.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "requirement": "All backend endpoints return structured error variants for invalid inputs (typed error responses), rather than trapping.",
+      "reason": "The backend uses `Runtime.trap(\"Unauthorized...\")` for auth failures, and no typed `Result`/error variants are shown for invalid inputs.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "requirement": "Backend must validate uploaded leaf image size/type and return a structured error for invalid inputs (missing image/too large/unsupported type).",
+      "reason": "`detectDisease(leafImage : Storage.ExternalBlob)` unconditionally returns a result with hardcoded disease info; no size/type validation or typed error response is evidenced.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Crop Yield Prediction page must render at least one graph visualization and include a sample agriculture dataset in-repo referenced in code.",
+      "reason": "No chart rendering or sample dataset file/usage is evidenced in the provided diff snippet (only routing and hooks/components are shown).",
+      "evidence": [
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useCropYieldPrediction.ts"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "requirement": "Visualizations page must show charts (yield accuracy trend/distribution, disease confidence distribution, irrigation yes/no breakdown) using a charting library and data from real stored history returned by the backend.",
+      "reason": "The Visualizations page implementation and any charting library usage are not evidenced in the provided diff snippet (only the route registration is shown).",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "requirement": "Provide production-ready README documentation with local run steps (dfx), module descriptions, constraints explanation, and how to test each module from the frontend; add explanatory comments where needed.",
+      "reason": "No README or documentation changes are shown in the diff summary (all files listed are code files; no README evidenced).",
+      "evidence": [
+        "<file-diff>: no README shown"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "requirement": "Include in-repo static demo artifacts: (1) a small crop yield dataset file, and (2) a disease label→treatment mapping file; frontend loads them without external network calls.",
+      "reason": "Aside from referencing a generated logo path in the nav, no dataset/mapping asset files or code loading them are evidenced in the provided diff snippet.",
+      "evidence": [
+        "frontend/src/components/AppNav.tsx"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Allow authenticated users to clear their history; backend deletes stored entries for that principal; UI updates immediately after clearing.",
+      "reason": "Frontend includes a clear-history hook that calls `actor.clearHistory()`, but the backend `clearHistory` implementation is not evidenced in the shown/truncated backend code, nor is principal-scoped deletion shown.",
+      "evidence": [
+        "frontend/src/hooks/useHistoryQueries.ts",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Custom access-control initialization using a secret URL parameter (`caffeineAdminToken`) and backend authorization mixins beyond Internet Identity gating.",
+      "reason": "BuildRequest requires Internet Identity authentication and principal association, but does not request an admin-secret initialization flow or secret URL parameter-based access control.",
+      "evidence": [
+        "frontend/src/hooks/useActor.ts",
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Blob-storage mixin inclusion and storing the full uploaded leaf image blob in history results (`leafImage : Storage.ExternalBlob`).",
+      "reason": "BuildRequest requires sending an image to backend and returning diseaseName/confidence/treatment; it does not require persisting the raw image blob inside history results.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "description": "Profile setup modal and user profile hooks/components.",
+      "reason": "User profile setup is not requested in any REQ; only II auth + module flows + history are requested.",
+      "evidence": [
+        "frontend/src/components/ProfileSetupModal.tsx",
+        "frontend/src/hooks/useUserProfile.ts"
+      ]
+    }
+  ],
+  "confidence": 0.67,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/README.md",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/components/AppAlert.tsx",
+    "frontend/src/components/AppNav.tsx",
+    "frontend/src/components/AuthGate.tsx",
+    "frontend/src/components/FormField.tsx",
+    "frontend/src/components/HistorySection.tsx",
+    "frontend/src/components/ImageUploadField.tsx",
+    "frontend/src/components/LoginButton.tsx",
+    "frontend/src/components/ProfileSetupModal.tsx",
+    "frontend/src/components/ThemeCard.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useCropYieldPrediction.ts",
+    "frontend/src/hooks/useDiseaseDetection.ts",
+    "frontend/src/hooks/useHistoryQueries.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/hooks/useIrrigationRecommendation.ts",
+    "frontend/src/hooks/useUserProfile.ts",
+    "frontend/src/index.css",
+    "frontend/src/layouts/AppLayout.tsx",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/CropYieldPage.tsx",
+    "frontend/src/pages/DashboardPage.tsx",
+    "frontend/src/pages/DiseaseDetectionPage.tsx",
+    "frontend/src/pages/IrrigationPage.tsx",
+    "frontend/src/pages/VisualizationsPage.tsx",
+    "frontend/src/utils/fileToUint8Array.ts",
+    "frontend/src/utils/formatErrorMessage.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/src/utils/validation.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

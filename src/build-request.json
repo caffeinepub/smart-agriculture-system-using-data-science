@@ -1,0 +1,246 @@
+{
+  "kind": "build_request",
+  "title": "Smart Agriculture System using Data Science (IC-ready React + Motoko)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a clean dashboard UI with separate pages for: (1) Crop Yield Prediction, (2) Plant Disease Detection (leaf image upload), (3) Smart Irrigation Recommendation, plus a (4) Data Visualization page that summarizes results across modules.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Features:\n- Clean dashboard UI\n- Separate pages for each module\n\nExtra:\n- Add data visualization dashboard"
+        ]
+      },
+      "acceptanceCriteria": [
+        "App has a persistent navigation (sidebar or top nav) linking to Dashboard, Crop Yield, Disease Detection, Irrigation, Visualizations.",
+        "Each module page contains an input form, a submit action, a results panel, and clear empty/loading/error states.",
+        "All user-facing text is in English."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Add a coherent, distinctive visual theme and apply it consistently (colors, typography, spacing, card styles, form controls) across all pages without using a blue/purple primary palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Frontend: React.js (simple clean UI)",
+          "Features:\n- Clean dashboard UI"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Theme is applied consistently across layout, buttons, inputs, charts, and cards.",
+        "Primary colors are not blue/purple."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Create a Motoko backend (single main actor) that exposes typed APIs for the three modules and stores per-user history of predictions/results in stable storage.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Features:\n- API endpoints for ML models\n- Error handling\n- Database schema"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend provides update calls for: crop yield prediction, disease detection request submission (metadata), and irrigation recommendation.",
+        "Backend provides query calls to list the authenticated user’s past results for each module.",
+        "Data persists across canister upgrades using stable variables (no external DB).",
+        "All endpoints return structured error variants for invalid inputs."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Crop Yield Prediction module: implement an end-to-end flow that accepts inputs (Soil Type, Rainfall mm, Temperature °C, Humidity %, Fertilizer Usage), returns Predicted Yield (tons/hectare) and an Accuracy Score, and renders at least one graph visualization on the frontend.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "1. Crop Yield Prediction Module\n- Inputs:\n    - Soil Type\n    - Rainfall (mm)\n    - Temperature (°C)\n    - Humidity (%)\n    - Fertilizer Usage\n- Use Random Forest Regression model\n- Train on sample agriculture dataset\n- Output:\n    - Predicted Yield (tons per hectare)\n    - Accuracy Score\n    - Graph Visualization"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Frontend form validates numeric ranges (no negative rainfall/humidity, etc.) and shows inline errors.",
+        "Calling the backend returns a numeric predicted yield and a numeric accuracy score.",
+        "Frontend renders a chart (e.g., bar/line) showing the prediction in context (e.g., feature contributions, or comparison to sample baseline values).",
+        "A sample agriculture dataset is included in the repo as a static file and referenced in code (for demo/visualization)."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Plant Disease Detection module: provide a leaf image upload UI, send the image to the backend, and return Disease Name, Confidence Percentage, and Suggested Treatment.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "2. Plant Disease Detection Module\n- Upload leaf image\n- Use CNN model\n- Train on PlantVillage dataset\n- Output:\n    - Disease Name\n    - Confidence Percentage\n    - Suggested Treatment"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Frontend supports uploading common image formats (at least PNG/JPG) and shows a preview before submission.",
+        "Backend accepts the uploaded image payload (or its encoded representation) with size/type validation and returns a structured result containing diseaseName, confidence, and treatment.",
+        "Frontend displays the result in a clear card layout and records the result into the user’s history.",
+        "If input is invalid (missing image/too large/unsupported type), user sees a clear error message."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Smart Irrigation Recommendation module: implement an end-to-end flow that accepts inputs (Soil Moisture Level, Weather Condition, Temperature) and returns Water Required (liters/acre) and Irrigation Recommendation (Yes/No).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "3. Smart Irrigation Recommendation\n- Inputs:\n    - Soil Moisture Level\n    - Weather Condition\n    - Temperature\n- Output:\n    - Water Required (Liters per acre)\n    - Irrigation Recommendation (Yes/No)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Frontend validates inputs and shows error states for missing/invalid values.",
+        "Backend returns a numeric waterRequiredLitersPerAcre and a boolean/enum recommendation.",
+        "Result is shown on the page and stored in per-user history."
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Add a visualizations page that compares module outputs and “model accuracy comparison” charts using a frontend charting library.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Extra:\n- Show model accuracy comparison"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Visualizations page shows at least: (1) crop yield accuracy score trend or distribution, (2) disease detection confidence distribution, (3) irrigation recommendation breakdown (Yes/No) over history.",
+        "Charts render from real stored history returned by the backend (not hardcoded)."
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement authentication using Internet Identity and gate history/persistence features behind the authenticated principal (no custom username/password storage).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Extra:\n- Add basic authentication (login/signup)"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can sign in/out with Internet Identity.",
+        "When signed out, module pages still render but any “Save to history / View history” features prompt sign-in (or history is hidden).",
+        "Backend associates stored results with caller principal."
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Add robust error handling end-to-end: client-side validation, backend input validation, and consistent error messaging in the UI.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Features:\n- Error handling"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All backend endpoints return typed error responses for invalid payloads and unexpected failures.",
+        "Frontend displays errors in a consistent component (toast/alert) and prevents duplicate submissions while loading."
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Provide production-ready project documentation: README with local run steps for the Internet Computer template, clear module descriptions, and how to test each API from the frontend; add code comments where necessary to explain data flow and assumptions.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Deliverables:\n- Instructions to run locally\n\nFeatures:\n- README file\n- Comments in code\n- Requirements.txt file"
+        ]
+      },
+      "acceptanceCriteria": [
+        "README includes: prerequisites, install steps, how to run locally, how to deploy locally with dfx, and how to use each module UI.",
+        "Documentation explains platform constraints vs the originally requested Python/ML stack and what is implemented instead.",
+        "Key logic sections (backend prediction/recommendation logic and frontend API calls) include brief explanatory comments."
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Include sample datasets/artifacts in-repo as static assets suitable for demo/visualization (e.g., a small CSV/JSON for agriculture yield examples and a small label/treatment mapping for diseases).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Deliverables:\n- Sample dataset",
+          "Modules Required:\n- Train on sample agriculture dataset",
+          "- Train on PlantVillage dataset"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Repo includes at least one small sample dataset file for crop yield visualization and one disease label→treatment mapping file.",
+        "Frontend loads these assets without requiring any external network calls."
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Create a “History” section (either per module or centralized) that lists the authenticated user’s saved runs with timestamps and the key output fields, and allows clearing history.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Database schema",
+          "Features:\n- Clean dashboard UI"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Authenticated users can view a list of past results for each module including timestamp and output summary.",
+        "Users can clear their history; backend deletes the stored entries for that principal.",
+        "UI updates immediately after clearing (refetch or optimistic update)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Backend must be implemented in Motoko as a single-actor canister (no Flask/FastAPI).",
+    "No external databases (no MySQL/SQLite); persist data using canister stable storage.",
+    "No external ML frameworks (no scikit-learn / TensorFlow/Keras) can run in-canister; any “model” behavior must be implemented with lightweight deterministic logic and/or precomputed parameters stored in-repo.",
+    "Frontend must use the existing template’s immutable hook/component paths without editing them (compose them instead).",
+    "Do not add third-party authentication beyond Internet Identity."
+  ],
+  "nonGoals": [
+    "Training a real Random Forest Regression model or CNN model inside the deployed app.",
+    "Downloading or bundling the full PlantVillage dataset in the deployed app (only small demo assets/mappings).",
+    "Implementing username/password signup/login with password storage or reset flows.",
+    "Integrating external Python services or external REST microservices."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Minimal farm-themed app logo (smart-agri-logo.dim_512x512.png)",
+      "Wide dashboard hero illustration with fields, sensors, and crops in a clean flat style (dashboard-hero.dim_1600x600.png)"
+    ],
+    "edits": []
+  }
+}

@@ -1,2 +1,3 @@
-# smart-agriculture-system-using-data-science
-Exported from Caffeine project: Smart Agriculture System using Data Science
+## Smart Agriculture System using Data Science
+
+To run app build and run docker image: `docker build -t app . docker run -it --network host app`
